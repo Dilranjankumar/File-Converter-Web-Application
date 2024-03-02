@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin-top: 100px; /* Margin to accommodate the navbar */
+        }
+        .card {
+            background: linear-gradient(to bottom, #ffffff, #f3f3f3);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            z-index: -1;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+        .card h2 {
+            margin-top: 0;
+            font-size: 24px;
+            text-align: center;
+            color: #007bff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .card form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card input[type="file"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            outline: none;
+            width: 80%;
+            max-width: 300px;
+        }
+        .card button {
+            padding: 12px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card button:hover {
+            background-color: #0056b3;
+        }
+        .navbar {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .navbar-nav .nav-link {
+            font-size: 18px;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ccc;
+        }
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">File Converter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pdfToWord" onclick="scrollToSection('pdfToWord')">PDF to Word</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#wordToPdf" onclick="scrollToSection('wordToPdf')">Word to PDF</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#imageToPdf" onclick="scrollToSection('imageToPdf')">Image to PDF</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mergeImages" onclick="scrollToSection('mergeImages')">Merge Images</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pdfToExcel" onclick="scrollToSection('pdfToExcel')">PDF to Excel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- PDF to Word Converter Section -->
+            <div class="col-md-4 card" id="pdfToWord">
+                                                <div class="card">
+                    <h2>PDF to Word Converter</h2>
+                    <form action="/convert" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".pdf" required>
+                        <button type="submit" class="btn btn-primary">Convert to Word</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Word to PDF Converter Section -->
+            <div class="col-md-4 card" id="wordToPdf">
+                                                <div class="card">
+                    <h2>Word to PDF Converter</h2>
+                    <form action="/convert" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".docx" required>
+                        <button type="submit" class="btn btn-primary">Convert to PDF</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Image to PDF Converter Section -->
+            <div class="col-md-4 card" id="imageToPdf">
+                                <div class="card">
+                    <h2>Image to PDF Converter</h2>
+                    <form action="/convert" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".jpg, .jpeg, .png" required>
+                        <button type="submit" class="btn btn-primary">Convert to PDF</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Merge Images to PDF Section -->
+            <div class="col-md-4 card" id="mergeImages">
+                                                <div class="card">
+                    <h2>Merge Images to PDF</h2>
+                    <form action="/convert" method="post" enctype="multipart/form-data">
+                        <input type="file" name="files[]" accept=".jpg, .jpeg, .png" multiple required>
+                        <button type="submit" class="btn btn-primary">Merge to PDF</button>
+                    </form>
+                </div>
+            </div>
+            <!-- PDF to Excel Converter Section -->
+            <div class="col-md-4 card" id="pdfToExcel">
+                                                <div class="card">
+                    <h2>PDF to Excel Converter</h2>
+                    <form action="/convert" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".pdf" required>
+                        <button type="submit" class="btn btn-primary">Convert to Excel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 File Converter. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+    
+    
+</body>
+</html>
